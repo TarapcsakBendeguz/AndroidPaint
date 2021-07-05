@@ -1,30 +1,30 @@
 <resources>
     <string name="app_name">Android Paint</string>
 
-    <string name="style">Stílus</string>
-    <string name="line">Vonal</string>
-    <string name="point">Pont</string>
+    <string name="style">Style</string>
+    <string name="line">Line</string>
+    <string name="point">Point</string>
 
-    <string name="are_you_sure_want_to_exit">Biztosan ki akarsz lépni?</string>
+    <string name="are_you_sure_want_to_exit">Do you want to exit the program?</string>
     <string name="ok">OK</string>
-    <string name="cancel">Mégse</string>
-    <string name="circle">circle</string>
-    <string name="square">square</string>
-    <string name="image">image</string>
-    <string name="save">save</string>
-    <string name="load">load</string>
-    <string name="delete">delete</string>
-    <string name="color">color</string>
+    <string name="cancel">Cancel</string>
+    <string name="circle">Circle</string>
+    <string name="square">Square</string>
+    <string name="image">Image</string>
+    <string name="save">Save</string>
+    <string name="load">Load</string>
+    <string name="delete">Delete</string>
+    <string name="color">Color</string>
     <string name="text_to_paste">Text to paste...</string>
     <string name="font_type">Font type:</string>
     <string name="font_size">Font size:</string>
     <string name="bold">Bold</string>
-    <string name="underlined">underlined</string>
-    <string name="italic">italic</string>
-    <string name="text">text</string>
-    <string name="newp">new</string>
-    <string name="overwrite">overwrite</string>
+    <string name="underlined">Underlined</string>
+    <string name="italic">Italic</string>
+    <string name="text">Text</string>
+    <string name="newp">New</string>
+    <string name="overwrite">Overwrite</string>
     <string name="existing_projects">Existing\nProjects:</string>
     <string name="new_project">New\nProject:</string>
-    <string name="project_name">project name</string>
+    <string name="project_name">Project name</string>
 </resources>
