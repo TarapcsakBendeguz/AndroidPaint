@@ -83,6 +83,8 @@ public class DrawingView extends View {
 
     public void setDrawingStyle(final DrawingStyle drawingStyle) {
         this.currentDrawingStyle = drawingStyle;
+        setTextData(null);
+        setTempImg(null);
     }
 
     public void clearCanvas(){
@@ -166,16 +168,31 @@ public class DrawingView extends View {
         drawObjects.add(new Square(APoint, BPoint, APoint.getOrderNum()));
     }
     private void addImageToTheList(final Point APoint, final Point BPoint, final Bitmap img) {
-        Log.d("addToTheList", " object=Image");
-        drawObjects.add(new Image(APoint, BPoint, img, APoint.getOrderNum()));
+        if(tempImg != null) {
+            Log.d("addToTheList", " object=Image");
+            drawObjects.add(new Image(APoint, BPoint, img, APoint.getOrderNum()));
+        }
+        else{
+            Log.w("addToTheList", " object not added, image not found");
+        }
     }
     private void addTextToTheList(final Point BPoint) {
-        Log.d("addToTheList", " object=Text");
-        drawObjects.add(new Text(BPoint, BPoint.getColor(), textData.get(0), textData.get(1), Integer.parseInt(textData.get(2)), Integer.parseInt(textData.get(3)), Integer.parseInt(textData.get(4)), BPoint.getOrderNum()));
+        if (textData != null && textData.size()==5) {
+            Log.d("addToTheList", " object=Text");
+            drawObjects.add(new Text(BPoint, BPoint.getColor(), textData.get(0), textData.get(1), Integer.parseInt(textData.get(2)), Integer.parseInt(textData.get(3)), Integer.parseInt(textData.get(4)), BPoint.getOrderNum()));
+        }
+        else{
+            Log.w("addToTheList", " object not added, Text data not found");
+        }
     }
 
     @Override
     protected void onDraw(final Canvas canvas) {
+        if (canvas == null) {
+            Log.e("onDraw", " canvas not found");
+            return;
+        }
+
         super.onDraw(canvas);
 
         for (final DrawObject drawObject : drawObjects) {
@@ -220,7 +237,9 @@ public class DrawingView extends View {
                 drawPicture(canvas, APoint, BPoint, tempImg);
                 break;
             case TEXT:
-                drawText(canvas, BPoint, textData.get(0), textData.get(1), Integer.parseInt(textData.get(2)), Integer.parseInt(textData.get(3)), Integer.parseInt(textData.get(4)));
+                if (textData != null && textData.size()==5) {
+                    drawText(canvas, BPoint, textData.get(0), textData.get(1), Integer.parseInt(textData.get(2)), Integer.parseInt(textData.get(3)), Integer.parseInt(textData.get(4)));
+                }
                 break;
         }
     }
@@ -275,7 +294,7 @@ public class DrawingView extends View {
         paint.setColor(oldcolor);
     }
     private void drawPicture(final Canvas canvas, final Point APoint, final Point BPoint, final Bitmap bitmap) {
-        if (APoint == null || BPoint == null) {
+        if (APoint == null || BPoint == null || bitmap == null) {
             return;
         }
         Log.d("drawPicture", "");
@@ -305,7 +324,7 @@ public class DrawingView extends View {
     }
     private void drawText(final Canvas canvas, final Point point, String text, String text_t, int text_s, int b, int i) {
         Log.d("drawText", "");
-        if (point == null) {
+        if (point == null || text == null || text_t == null || text_s < 0 || b < 0 || i < 0 || text.isEmpty() || text_t.isEmpty()) {
             return;
         }
         Paint oldpaint = paint;

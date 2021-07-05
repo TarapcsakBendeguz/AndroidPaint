@@ -148,43 +148,33 @@ public class DrawingActivity extends AppCompatActivity {
                 canvas.setDrawingStyle(DrawingView.DrawingStyle.LINE);
                 styleMenu.setIcon(R.drawable.baseline_remove_white_24);
                 item.setChecked(true);
-                canvas.setTextData(null);
-                canvas.setTempImg(null);
                 return true;
             case R.id.menu_style_point:
                 canvas.setDrawingStyle(DrawingView.DrawingStyle.POINT);
                 styleMenu.setIcon(R.drawable.baseline_filter_center_focus_white_24);
                 item.setChecked(true);
-                canvas.setTextData(null);
-                canvas.setTempImg(null);
                 return true;
             case R.id.menu_style_circle:
                 canvas.setDrawingStyle(DrawingView.DrawingStyle.CIRCLE);
                 styleMenu.setIcon(R.drawable.baseline_panorama_fish_eye_white_24);
                 item.setChecked(true);
-                canvas.setTextData(null);
-                canvas.setTempImg(null);
                 return true;
             case R.id.menu_style_square:
                 canvas.setDrawingStyle(DrawingView.DrawingStyle.SQUARE);
                 styleMenu.setIcon(R.drawable.baseline_crop_square_white_24);
                 item.setChecked(true);
-                canvas.setTextData(null);
-                canvas.setTempImg(null);
                 return true;
             case R.id.menu_style_image:
                 canvas.setDrawingStyle(DrawingView.DrawingStyle.IMAGE);
                 styleMenu.setIcon(R.drawable.baseline_collections_white_24);
                 item.setChecked(true);
                 selectImage();
-                canvas.setTextData(null);
                 return true;
             case R.id.menu_style_text:
                 canvas.setDrawingStyle(DrawingView.DrawingStyle.TEXT);
                 styleMenu.setIcon(R.drawable.baseline_edit_white_24);
                 item.setChecked(true);
                 startActivityForResult(new Intent(DrawingActivity.this,TextPicker.class), 2);
-                canvas.setTempImg(null);
                 return true;
             case R.id.menu_save:
                 Intent intent = new Intent(DrawingActivity.this,ProjectPicker.class);
@@ -282,6 +272,9 @@ public class DrawingActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
+                else{
+                    canvas.setTempImg(null);
+                }
                 break;
             case 2: {
                 if (resCode == RESULT_OK) {
@@ -293,6 +286,9 @@ public class DrawingActivity extends AppCompatActivity {
                     textData.add(data.getStringExtra("i"));
 
                     canvas.setTextData(textData);
+                }
+                else{
+                    canvas.setTextData(null);
                 }
                 break;
             }
