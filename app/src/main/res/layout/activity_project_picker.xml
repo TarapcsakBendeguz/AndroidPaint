@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:orientation="vertical"
+    tools:context=".ProjectPicker"
+    android:background="@color/colorPrimary">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:weightSum="3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+        <CheckBox
+            android:id="@+id/proj_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/newp"
+            android:textAlignment="textEnd"
+            android:button="@null"
+            android:drawableRight="?android:attr/listChoiceIndicatorMultiple"/>
+        <CheckBox
+            android:id="@+id/proj_ow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/overwrite"
+            android:textAlignment="textEnd"
+            android:button="@null"
+            android:drawableRight="?android:attr/listChoiceIndicatorMultiple"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ow"
+        android:saveEnabled="false"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:weightSum="10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:text="@string/existing_projects"
+                android:textSize="18dp" />
+            <Spinner
+                android:id="@+id/project"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/btn_dropdown"
+                android:spinnerMode="dropdown"
+                android:layout_weight="9"
+                android:textAlignment="center"
+                android:layout_gravity="center_vertical"/>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/warn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/red"
+            android:text="will overwrite existing project..."
+            android:textSize="10dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/np"
+        android:saveEnabled="false"
+        android:visibility="gone"
+        android:orientation="horizontal"
+        android:weightSum="10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:text="@string/new_project"
+            android:textSize="18dp" />
+        <EditText
+            android:id="@+id/new_proj"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="9"
+            android:hint="@string/project_name"
+            android:layout_gravity="center_vertical"
+            android:textAlignment="center"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/okbutton"
+        android:saveEnabled="false"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/ok" />
+
+
+</GridLayout>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:orientation="vertical"
+    tools:context=".TextPicker"
+    android:background="@color/colorPrimary">
+
+    <EditText
+        android:id="@+id/text_preview"
+        android:layout_width="match_parent"
+        android:layout_height="185dp"
+        android:textSize="40dp"
+        android:hint="@string/text_to_paste"
+        android:inputType="text"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:weightSum="10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:text="@string/font_type"
+            android:textSize="18dp" />
+    <Spinner
+        android:id="@+id/font_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown"
+        android:layout_weight="9"
+        android:textAlignment="center"
+        android:layout_gravity="center_vertical"/>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:weightSum="10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/font_size"
+        android:textSize="18dp"
+        android:layout_weight="1"
+        android:layout_gravity="center_vertical"/>
+    <EditText
+        android:id="@+id/font_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="9"
+        android:text="24"
+        android:layout_gravity="center_vertical"
+        android:textAlignment="center"
+        android:inputType="number"/>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:weightSum="3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+        <CheckBox
+            android:id="@+id/font_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/bold"
+            android:textAlignment="textEnd"
+            android:button="@null"
+            android:drawableRight="?android:attr/listChoiceIndicatorMultiple"/>
+        <CheckBox
+            android:id="@+id/font_italic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/italic"
+            android:textAlignment="textEnd"
+            android:button="@null"
+            android:drawableRight="?android:attr/listChoiceIndicatorMultiple"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/okbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/ok" />
+
+
+</GridLayout>

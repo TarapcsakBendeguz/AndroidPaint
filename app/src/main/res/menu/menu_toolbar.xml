@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_style"
+        android:checkableBehavior="single"
+        android:icon="@drawable/baseline_remove_white_24"
+        android:title="@string/style"
+        app:showAsAction="always">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/menu_style_line"
+                    android:checked="true"
+                    android:title="@string/line"/>
+                <item
+                    android:id="@+id/menu_style_point"
+                    android:checked="false"
+                    android:title="@string/point" />
+                <item
+                    android:id="@+id/menu_style_circle"
+                    android:checked="false"
+                    android:title="@string/circle" />
+                <item
+                    android:id="@+id/menu_style_square"
+                    android:checked="false"
+                    android:title="@string/square" />
+                <item
+                    android:id="@+id/menu_style_image"
+                    android:checked="false"
+                    android:title="@string/image" />
+                <item
+                    android:id="@+id/menu_style_text"
+                    android:checked="false"
+                    android:title="@string/text" />
+            </group>
+        </menu>
+    </item>
+    <item
+        android:id="@+id/menu_save_load"
+        android:checkableBehavior="single"
+        android:icon="@drawable/baseline_save_white_24"
+        android:title="@string/save"
+        app:showAsAction="always">
+        <menu>
+            <group android:checkableBehavior="none">
+                <item
+                    android:id="@+id/menu_save"
+                    android:title="@string/save"/>
+                <item
+                    android:id="@+id/menu_load"
+                    android:title="@string/load" />
+            </group>
+        </menu>
+    </item>
+    <item
+        android:id="@+id/menu_delete"
+        android:checkableBehavior="single"
+        android:icon="@drawable/ic_clear_canvas"
+        android:title="@string/delete"
+        app:showAsAction="always">
+    </item>
+    <item
+        android:id="@+id/menu_color_pick"
+        android:checkableBehavior="single"
+        android:icon="@drawable/ic_color"
+        android:title="@string/color"
+        app:showAsAction="always">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/color_other"
+                    android:checked="false"
+                    android:title="Other" />
+                <item
+                    android:id="@+id/color_red"
+                    android:checked="false"
+                    android:title="Red" />
+                <item
+                    android:id="@+id/color_green"
+                    android:checked="true"
+                    android:title="Green"/>
+                <item
+                    android:id="@+id/color_blue"
+                    android:checked="false"
+                    android:title="Blue"/>
+            </group>
+        </menu>
+    </item>
+</menu>
