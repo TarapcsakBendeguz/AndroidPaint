@@ -7,8 +7,8 @@
     <string name="point">Point</string>
 
     <string name="are_you_sure_want_to_exit">Do you want to exit the program?</string>
-    <string name="ok">Yes</string>
-    <string name="cancel">No</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
     <string name="circle">Circle</string>
     <string name="square">Square</string>
     <string name="image">Image</string>
@@ -31,4 +31,6 @@
     <string name="strk_small">Small</string>
     <string name="strk_med">Medium</string>
     <string name="strk_big">Large</string>
+    <string name="preview">Preview:</string>
+    <string name="strk_spec">Special</string>
 </resources>

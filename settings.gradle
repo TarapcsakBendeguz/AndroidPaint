@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name='DrawingHW'
+rootProject.name='com.example.com.example.drawinghw'

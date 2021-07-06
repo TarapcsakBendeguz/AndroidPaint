@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="aut.bme.hu.drawinghw">
+    package="com.example.drawinghw">
 
     <application
         android:allowBackup="true"
@@ -9,9 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ProjectPicker"></activity>
+        <activity android:name=".ProjectPicker"/>
         <activity android:name=".TextPicker" />
         <activity android:name=".ColorPicker" />
+        <activity android:name=".StrokeWidthPicker" />
         <activity
             android:name=".DrawingActivity"
             android:screenOrientation="portrait">
