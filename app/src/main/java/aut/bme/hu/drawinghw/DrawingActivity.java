@@ -98,7 +98,10 @@ public class DrawingActivity extends AppCompatActivity {
         catch (SQLiteException sqle){
             Log.e("Error", "Error in SQLite: " + sqle.toString());
             if(sqle.toString().contains("points") || sqle.toString().contains("lines") || sqle.toString().contains("squares") || sqle.toString().contains("circles")){
-                //dataHelper.getDbHelper().simpleUpgrade(dataHelper.getDatabase());
+                dataHelper.getDbHelper().resetTables(dataHelper.getDatabase());
+            }
+            if(sqle.toString().contains("no such column")){
+                dataHelper.getDbHelper().simpleUpgrade(dataHelper.getDatabase());
                 dataHelper.getDbHelper().resetTables(dataHelper.getDatabase());
             }
         }
@@ -228,6 +231,18 @@ public class DrawingActivity extends AppCompatActivity {
             case R.id.color_blue:
                 item.setChecked(true);
                 canvas.setPaint(Color.rgb(0,0,255));
+                return true;
+            case R.id.stroke_small:
+                item.setChecked(true);
+                canvas.setPenSize(5);
+                return true;
+            case R.id.stroke_med:
+                item.setChecked(true);
+                canvas.setPenSize(10);
+                return true;
+            case R.id.stroke_big:
+                item.setChecked(true);
+                canvas.setPenSize(20);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

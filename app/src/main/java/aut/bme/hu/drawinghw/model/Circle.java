@@ -9,8 +9,8 @@ public class Circle extends DrawObject {
         super();
     }
 
-    public Circle(final Point center, final Point rim, final int order) {
-        super(order, ObjectTypes.CIRCLE);
+    public Circle(final Point center, final Point rim, final int order, final int width) {
+        super(order, ObjectTypes.CIRCLE, width);
         this.center = center;
         this.rim = rim;
     }

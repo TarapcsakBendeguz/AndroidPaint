@@ -37,6 +37,7 @@ public class PersistentDataHelper {
             PointsTable.Columns.coord_y.name(),
             PointsTable.Columns.color.name(),
             PointsTable.Columns.ordernum.name(),
+            PointsTable.Columns.strokeWidth.name(),
             PointsTable.Columns.project.name(),
             PointsTable.Columns.type.name()
 
@@ -50,6 +51,7 @@ public class PersistentDataHelper {
             LinesTable.Columns.end_y.name(),
             LinesTable.Columns.color.name(),
             LinesTable.Columns.ordernum.name(),
+            LinesTable.Columns.strokeWidth.name(),
             LinesTable.Columns.project.name(),
             LinesTable.Columns.type.name()
     };
@@ -62,6 +64,7 @@ public class PersistentDataHelper {
             CirclesTable.Columns.rim_y.name(),
             CirclesTable.Columns.color.name(),
             CirclesTable.Columns.ordernum.name(),
+            CirclesTable.Columns.strokeWidth.name(),
             CirclesTable.Columns.project.name(),
             CirclesTable.Columns.type.name()
     };
@@ -74,6 +77,7 @@ public class PersistentDataHelper {
             SquaresTable.Columns.end_y.name(),
             SquaresTable.Columns.color.name(),
             SquaresTable.Columns.ordernum.name(),
+            SquaresTable.Columns.strokeWidth.name(),
             SquaresTable.Columns.project.name(),
             SquaresTable.Columns.type.name()
     };
@@ -85,6 +89,7 @@ public class PersistentDataHelper {
             ImagesTable.Columns.bCorner_y.name(),
             ImagesTable.Columns.pictureInBytes.name(),
             ImagesTable.Columns.ordernum.name(),
+            ImagesTable.Columns.strokeWidth.name(),
             ImagesTable.Columns.project.name(),
             ImagesTable.Columns.type.name()
     };
@@ -100,6 +105,7 @@ public class PersistentDataHelper {
             TextsTable.Columns.B.name(),
             TextsTable.Columns.I.name(),
             TextsTable.Columns.ordernum.name(),
+            TextsTable.Columns.strokeWidth.name(),
             TextsTable.Columns.project.name(),
             TextsTable.Columns.type.name()
     };
@@ -138,6 +144,7 @@ public class PersistentDataHelper {
             values.put(PointsTable.Columns.coord_y.name(), point.getY());
             values.put(PointsTable.Columns.color.name(), point.getColor());
             values.put(PointsTable.Columns.ordernum.name(), point.getOrderNum());
+            values.put(PointsTable.Columns.strokeWidth.name(), point.getStrokeWidth());
             values.put(PointsTable.Columns.type.name(), point.getObjectType().toString());
             values.put(PointsTable.Columns.project.name(), proj);
             database.insertOrThrow(PointsTable.TABLE_POINTS, null, values);
@@ -154,6 +161,7 @@ public class PersistentDataHelper {
             values.put(LinesTable.Columns.end_y.name(), line.getEnd().getY());
             values.put(LinesTable.Columns.color.name(), line.getColor());
             values.put(LinesTable.Columns.ordernum.name(), line.getOrderNum());
+            values.put(LinesTable.Columns.strokeWidth.name(), line.getStrokeWidth());
             values.put(LinesTable.Columns.project.name(), proj);
             values.put(LinesTable.Columns.type.name(), line.getObjectType().toString());
             database.insertOrThrow(LinesTable.TABLE_LINES, null, values);
@@ -170,6 +178,7 @@ public class PersistentDataHelper {
             values.put(CirclesTable.Columns.rim_y.name(), circle.getRim().getY());
             values.put(CirclesTable.Columns.color.name(), circle.getColor());
             values.put(CirclesTable.Columns.ordernum.name(), circle.getOrderNum());
+            values.put(CirclesTable.Columns.strokeWidth.name(), circle.getStrokeWidth());
             values.put(CirclesTable.Columns.project.name(), proj);
             values.put(CirclesTable.Columns.type.name(), circle.getObjectType().toString());
             database.insertOrThrow(CirclesTable.TABLE_CIRCLES, null, values);
@@ -186,6 +195,7 @@ public class PersistentDataHelper {
             values.put(SquaresTable.Columns.end_y.name(), square.getEnd().getY());
             values.put(SquaresTable.Columns.color.name(), square.getColor());
             values.put(SquaresTable.Columns.ordernum.name(), square.getOrderNum());
+            values.put(SquaresTable.Columns.strokeWidth.name(), square.getStrokeWidth());
             values.put(SquaresTable.Columns.project.name(), proj);
             values.put(SquaresTable.Columns.type.name(), square.getObjectType().toString());
             database.insertOrThrow(SquaresTable.TABLE_SQUARES, null, values);
@@ -202,6 +212,7 @@ public class PersistentDataHelper {
             values.put(ImagesTable.Columns.bCorner_y.name(), image.getbPoint().getY());
             values.put(ImagesTable.Columns.pictureInBytes.name(), image.getPictureInBytes());
             values.put(ImagesTable.Columns.ordernum.name(), image.getOrderNum());
+            values.put(ImagesTable.Columns.strokeWidth.name(), image.getStrokeWidth());
             values.put(ImagesTable.Columns.project.name(), proj);
             values.put(ImagesTable.Columns.type.name(), image.getObjectType().toString());
             database.insertOrThrow(ImagesTable.TABLE_IMAGES, null, values);
@@ -221,6 +232,7 @@ public class PersistentDataHelper {
             values.put(TextsTable.Columns.B.name(), text.getB());
             values.put(TextsTable.Columns.I.name(), text.getI());
             values.put(TextsTable.Columns.ordernum.name(), text.getOrderNum());
+            values.put(TextsTable.Columns.strokeWidth.name(), text.getStrokeWidth());
             values.put(TextsTable.Columns.project.name(), proj);
             values.put(TextsTable.Columns.type.name(), text.getObjectType().toString());
             database.insertOrThrow(TextsTable.TABLE_TEXTS, null, values);
@@ -280,8 +292,8 @@ public class PersistentDataHelper {
         final Cursor cursor = database.query(SquaresTable.TABLE_SQUARES, squareColumns, "project = '" + proj + "'", null, null, null, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            final Square line = cursorToSquare(cursor);
-            lines.add(line);
+            final Square square = cursorToSquare(cursor);
+            lines.add(square);
             cursor.moveToNext();
         }
         cursor.close();
@@ -343,6 +355,7 @@ public class PersistentDataHelper {
         point.setY(cursor.getFloat(PointsTable.Columns.coord_y.ordinal()));
         point.setColor((int)cursor.getFloat(PointsTable.Columns.color.ordinal()));
         point.setOrderNum((int)cursor.getFloat(PointsTable.Columns.ordernum.ordinal()));
+        point.setStrokeWidth((int)cursor.getFloat(PointsTable.Columns.strokeWidth.ordinal()));
         point.setObjectType("POINT");
         return point;
     }
@@ -359,6 +372,7 @@ public class PersistentDataHelper {
         line.setEnd(endPoint);
         line.setColor((int)cursor.getFloat(LinesTable.Columns.color.ordinal()));
         line.setOrderNum((int)cursor.getFloat(LinesTable.Columns.ordernum.ordinal()));
+        line.setStrokeWidth((int)cursor.getFloat(LinesTable.Columns.strokeWidth.ordinal()));
         line.setObjectType("LINE");
         return line;
     }
@@ -375,6 +389,7 @@ public class PersistentDataHelper {
         circle.setRim(rimPoint);
         circle.setColor((int)cursor.getFloat(CirclesTable.Columns.color.ordinal()));
         circle.setOrderNum((int)cursor.getFloat(CirclesTable.Columns.ordernum.ordinal()));
+        circle.setStrokeWidth((int)cursor.getFloat(CirclesTable.Columns.strokeWidth.ordinal()));
         circle.setObjectType("CIRCLE");
         return circle;
     }
@@ -391,6 +406,7 @@ public class PersistentDataHelper {
         line.setEnd(endPoint);
         line.setColor((int)cursor.getFloat(SquaresTable.Columns.color.ordinal()));
         line.setOrderNum((int)cursor.getFloat(SquaresTable.Columns.ordernum.ordinal()));
+        line.setStrokeWidth((int)cursor.getFloat(SquaresTable.Columns.strokeWidth.ordinal()));
         line.setObjectType("SQUARE");
         return line;
     }
@@ -411,6 +427,7 @@ public class PersistentDataHelper {
         Bitmap mutableBitmap = bmp.copy(Bitmap.Config.ARGB_8888, true);
         image.setPicture(mutableBitmap);
         image.setOrderNum((int)cursor.getFloat(ImagesTable.Columns.ordernum.ordinal()));
+        image.setStrokeWidth((int)cursor.getFloat(ImagesTable.Columns.strokeWidth.ordinal()));
         image.setObjectType("IMAGE");
         return image;
     }
@@ -428,6 +445,7 @@ public class PersistentDataHelper {
         text.setI((int)cursor.getFloat(TextsTable.Columns.I.ordinal()));
         text.setB((int)cursor.getFloat(TextsTable.Columns.B.ordinal()));
         text.setOrderNum((int)cursor.getFloat(TextsTable.Columns.ordernum.ordinal()));
+        text.setStrokeWidth((int)cursor.getFloat(TextsTable.Columns.strokeWidth.ordinal()));
         text.setObjectType("TEXT");
         return text;
     }

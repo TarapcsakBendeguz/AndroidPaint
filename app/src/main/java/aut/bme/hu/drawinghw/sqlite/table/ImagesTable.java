@@ -14,6 +14,7 @@ public class ImagesTable {
             + Columns.bCorner_y.name() + " real not null, "
             + Columns.pictureInBytes.name() + " real not null, "
             + Columns.ordernum.name() + " real not null, "
+            + Columns.strokeWidth.name() + " real not null, "
             + Columns.project.name() + " VARCHAR(50), "
             + Columns.type.name() + " VARCHAR(20) not null " + ");";
 
@@ -35,6 +36,7 @@ public class ImagesTable {
         bCorner_y,
         pictureInBytes,
         ordernum,
+        strokeWidth,
         project,
         type
     }

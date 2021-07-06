@@ -11,8 +11,8 @@ public class Point extends DrawObject {
         super();
     }
 
-    public Point(final float x, final float y, final int col, final int order) {
-        super(order, ObjectTypes.POINT);
+    public Point(final float x, final float y, final int col, final int order, final int width) {
+        super(order, ObjectTypes.POINT, width);
         this.x = x;
         this.y = y;
         color = col;

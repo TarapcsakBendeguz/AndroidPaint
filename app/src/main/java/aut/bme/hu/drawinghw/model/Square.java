@@ -9,8 +9,8 @@ public class Square extends DrawObject {
         super();
     }
 
-    public Square(final Point start, final Point end, final int order) {
-        super(order, ObjectTypes.SQUARE);
+    public Square(final Point start, final Point end, final int order, final int width) {
+        super(order, ObjectTypes.SQUARE, width);
         this.start = start;
         this.end = end;
     }

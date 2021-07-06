@@ -14,6 +14,7 @@ public class SquaresTable {
             + Columns.end_y.name() + " real not null, "
             + Columns.color.name() + " real not null, "
             + Columns.ordernum.name() + " real not null, "
+            + Columns.strokeWidth.name() + " real not null, "
             + Columns.project.name() + " VARCHAR(50), "
             + Columns.type.name() + " VARCHAR(20) not null " + ");";
 
@@ -35,6 +36,7 @@ public class SquaresTable {
         end_y,
         color,
         ordernum,
+        strokeWidth,
         project,
         type
     }

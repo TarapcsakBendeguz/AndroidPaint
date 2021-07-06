@@ -48,6 +48,7 @@ public class DrawingView extends View {
     private List<DrawObject> drawObjects;
     private List<String> textData;
 
+    private int penSize;
 
 
 
@@ -61,7 +62,8 @@ public class DrawingView extends View {
         paint = new Paint();
         paint.setColor(Color.GREEN);
         paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(5);
+        penSize = 5;
+        paint.setStrokeWidth(penSize);
         bufferPaint = new Paint(Paint.DITHER_FLAG);
     }
 
@@ -93,6 +95,8 @@ public class DrawingView extends View {
         BPoint = null;
         textData.clear();
         tempImg = null;
+        penSize = 5;
+        paint.setStrokeWidth(penSize);
         invalidate();
     }
 
@@ -107,15 +111,18 @@ public class DrawingView extends View {
         this.tempImg = tempImg;
     }
 
-
+    public void setPenSize(int size){
+        penSize = size;
+        paint.setStrokeWidth(penSize);
+    }
 
     @Override
     public boolean onTouchEvent(final MotionEvent event) {
-        BPoint = new Point(event.getX(), event.getY(), paint.getColor(), drawObjects.size());
+        BPoint = new Point(event.getX(), event.getY(), paint.getColor(), drawObjects.size(), penSize);
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 Log.d("onTouchEvent", "ACTION_DOWN: type="+currentDrawingStyle);
-                APoint = new Point(event.getX(), event.getY(), paint.getColor(), drawObjects.size());
+                APoint = new Point(event.getX(), event.getY(), paint.getColor(), drawObjects.size(), penSize);
                 break;
             case MotionEvent.ACTION_MOVE:
                 break;
@@ -157,20 +164,20 @@ public class DrawingView extends View {
     }
     private void addLineToTheList(final Point APoint, final Point BPoint) {
         Log.d("addToTheList", " object=Line");
-        drawObjects.add(new Line(APoint, BPoint, APoint.getOrderNum()));
+        drawObjects.add(new Line(APoint, BPoint, APoint.getOrderNum(), penSize));
     }
     private void addCircleToTheList(final Point APoint, final Point BPoint) {
         Log.d("addToTheList", " object=Circle");
-        drawObjects.add(new Circle(APoint, BPoint, APoint.getOrderNum()));
+        drawObjects.add(new Circle(APoint, BPoint, APoint.getOrderNum(), penSize));
     }
     private void addSquareToTheList(final Point APoint, final Point BPoint) {
         Log.d("addToTheList", " object=Square");
-        drawObjects.add(new Square(APoint, BPoint, APoint.getOrderNum()));
+        drawObjects.add(new Square(APoint, BPoint, APoint.getOrderNum(), penSize));
     }
     private void addImageToTheList(final Point APoint, final Point BPoint, final Bitmap img) {
         if(tempImg != null) {
             Log.d("addToTheList", " object=Image");
-            drawObjects.add(new Image(APoint, BPoint, img, APoint.getOrderNum()));
+            drawObjects.add(new Image(APoint, BPoint, img, APoint.getOrderNum(), penSize));
         }
         else{
             Log.w("addToTheList", " object not added, image not found");
@@ -179,7 +186,7 @@ public class DrawingView extends View {
     private void addTextToTheList(final Point BPoint) {
         if (textData != null && textData.size()==5) {
             Log.d("addToTheList", " object=Text");
-            drawObjects.add(new Text(BPoint, BPoint.getColor(), textData.get(0), textData.get(1), Integer.parseInt(textData.get(2)), Integer.parseInt(textData.get(3)), Integer.parseInt(textData.get(4)), BPoint.getOrderNum()));
+            drawObjects.add(new Text(BPoint, BPoint.getColor(), textData.get(0), textData.get(1), Integer.parseInt(textData.get(2)), Integer.parseInt(textData.get(3)), Integer.parseInt(textData.get(4)), BPoint.getOrderNum(), penSize));
         }
         else{
             Log.w("addToTheList", " object not added, Text data not found");
@@ -198,22 +205,22 @@ public class DrawingView extends View {
         for (final DrawObject drawObject : drawObjects) {
             if (drawObject.getObjectType() == DrawObject.ObjectTypes.POINT) {
                 Point p = (Point) drawObject;
-                drawPoint(canvas, p);
+                drawPoint(canvas, p, p.getStrokeWidth());
             } else if (drawObject.getObjectType() == DrawObject.ObjectTypes.LINE) {
                 Line l = (Line) drawObject;
-                drawLine(canvas, l.getStart(), l.getEnd());
+                drawLine(canvas, l.getStart(), l.getEnd(), l.getStrokeWidth());
             } else if (drawObject.getObjectType() == DrawObject.ObjectTypes.CIRCLE) {
                 Circle c = (Circle) drawObject;
-                drawCircle(canvas, c.getCenter(), c.getRim());
+                drawCircle(canvas, c.getCenter(), c.getRim(), c.getStrokeWidth());
             } else if (drawObject.getObjectType() == DrawObject.ObjectTypes.SQUARE) {
                 Square s = (Square) drawObject;
-                drawSquare(canvas, s.getStart(), s.getEnd());
+                drawSquare(canvas, s.getStart(), s.getEnd(), s.getStrokeWidth());
             } else if (drawObject.getObjectType() == DrawObject.ObjectTypes.IMAGE) {
                 Image i = (Image) drawObject;
-                drawPicture(canvas, i.getaPoint(), i.getbPoint(), i.getPicture());
+                drawPicture(canvas, i.getaPoint(), i.getbPoint(), i.getPicture(), i.getStrokeWidth());
             } else if (drawObject.getObjectType() == DrawObject.ObjectTypes.TEXT) {
                 Text t = (Text) drawObject;
-                drawText(canvas, t.getPoint(), t.getText(), t.getText_type(), t.getText_size(), t.getB(), t.getI());
+                drawText(canvas, t.getPoint(), t.getText(), t.getText_type(), t.getText_size(), t.getB(), t.getI(), t.getStrokeWidth());
             }
         }
 
@@ -222,64 +229,71 @@ public class DrawingView extends View {
         Log.d("onDraw", " type="+currentDrawingStyle);
         switch (currentDrawingStyle) {
             case POINT:
-                drawPoint(canvas, BPoint);
+                drawPoint(canvas, BPoint, penSize);
                 break;
             case LINE:
-                drawLine(canvas, APoint, BPoint);
+                drawLine(canvas, APoint, BPoint, penSize);
                 break;
             case CIRCLE:
-                drawCircle(canvas, APoint, BPoint);
+                drawCircle(canvas, APoint, BPoint, penSize);
                 break;
             case SQUARE:
-                drawSquare(canvas, APoint, BPoint);
+                drawSquare(canvas, APoint, BPoint, penSize);
                 break;
             case IMAGE:
-                drawPicture(canvas, APoint, BPoint, tempImg);
+                drawPicture(canvas, APoint, BPoint, tempImg, penSize);
                 break;
             case TEXT:
                 if (textData != null && textData.size()==5) {
-                    drawText(canvas, BPoint, textData.get(0), textData.get(1), Integer.parseInt(textData.get(2)), Integer.parseInt(textData.get(3)), Integer.parseInt(textData.get(4)));
+                    drawText(canvas, BPoint, textData.get(0), textData.get(1), Integer.parseInt(textData.get(2)), Integer.parseInt(textData.get(3)), Integer.parseInt(textData.get(4)), penSize);
                 }
                 break;
         }
     }
 
-    private void drawPoint(final Canvas canvas, final Point point) {
+    private void drawPoint(final Canvas canvas, final Point point, final int width) {
         Log.d("drawPoint", "");
         if (point == null) {
             return;
         }
         int oldcolor = paint.getColor();
+        paint.setStrokeWidth(width);
         paint.setColor(point.getColor());
         canvas.drawPoint(point.getX(), point.getY(), paint);
+        paint.setStrokeWidth(penSize);
         paint.setColor(oldcolor);
     }
-    private void drawLine(final Canvas canvas, final Point APoint, final Point BPoint) {
+    private void drawLine(final Canvas canvas, final Point APoint, final Point BPoint, final int width) {
         Log.d("drawLine", "");
         if (APoint == null || BPoint == null) {
             return;
         }
         int oldcolor = paint.getColor();
+        paint.setStrokeWidth(width);
         paint.setColor(APoint.getColor());
         canvas.drawLine(APoint.getX(), APoint.getY(), BPoint.getX(), BPoint.getY(), paint);
+        paint.setStrokeWidth(penSize);
         paint.setColor(oldcolor);
     }
-    private void drawCircle(final Canvas canvas, final Point APoint, final Point BPoint) {
+    private void drawCircle(final Canvas canvas, final Point APoint, final Point BPoint, final int width) {
         Log.d("drawCircle", "");
         if (APoint == null || BPoint == null) {
             return;
         }
         int oldcolor = paint.getColor();
+        paint.setStrokeWidth(width);
         paint.setColor(APoint.getColor());
         canvas.drawCircle(APoint.getX(), APoint.getY(), calcRadius(APoint, BPoint), paint);
+        paint.setStrokeWidth(penSize);
         paint.setColor(oldcolor);
     }
-    private void drawSquare(final Canvas canvas, final Point APoint, final Point BPoint) {
+    private void drawSquare(final Canvas canvas, final Point APoint, final Point BPoint, final int width) {
         Log.d("drawSquare", "");
         if (APoint == null || BPoint == null) {
             return;
         }
         int oldcolor = paint.getColor();
+        paint.setStrokeWidth(width);
         paint.setColor(APoint.getColor());
         float[] cornerFloats = {
         APoint.getX(), APoint.getY(),
@@ -291,9 +305,17 @@ public class DrawingView extends View {
         BPoint.getX(), APoint.getY(),
         APoint.getX(), APoint.getY()};
         canvas.drawLines(cornerFloats, paint);
+        paint.setStrokeWidth(penSize);
         paint.setColor(oldcolor);
     }
-    private void drawPicture(final Canvas canvas, final Point APoint, final Point BPoint, final Bitmap bitmap) {
+    private float calcRadius(Point A, Point B){
+        float R = 0;
+        float r2 = ((B.getX() - A.getX())* (B.getX() - A.getX())) + ((B.getY() - A.getY()) * (B.getY() - A.getY()));
+        double r = sqrt(r2);
+        R = Float.parseFloat(Double.toString(r));
+        return R;
+    }
+    private void drawPicture(final Canvas canvas, final Point APoint, final Point BPoint, final Bitmap bitmap, final int stwidth) {
         if (APoint == null || BPoint == null || bitmap == null) {
             return;
         }
@@ -312,17 +334,13 @@ public class DrawingView extends View {
 
         //bitmap.setHeight(height);
         //bitmap.setWidth(width);
+
+        //stwidth   majd ha lesz kerete a képnek akkor kell ez
+
         Bitmap scaled = Bitmap.createScaledBitmap(bitmap,width,height,false);
         canvas.drawBitmap(scaled, left, top, paint);
     }
-    private float calcRadius(Point A, Point B){
-        float R = 0;
-        float r2 = ((B.getX() - A.getX())* (B.getX() - A.getX())) + ((B.getY() - A.getY()) * (B.getY() - A.getY()));
-        double r = sqrt(r2);
-        R = Float.parseFloat(Double.toString(r));
-        return R;
-    }
-    private void drawText(final Canvas canvas, final Point point, String text, String text_t, int text_s, int b, int i) {
+    private void drawText(final Canvas canvas, final Point point, String text, String text_t, int text_s, int b, int i, final int width) {
         Log.d("drawText", "");
         if (point == null || text == null || text_t == null || text_s < 0 || b < 0 || i < 0 || text.isEmpty() || text_t.isEmpty()) {
             return;
@@ -355,6 +373,7 @@ public class DrawingView extends View {
             paint.setTypeface(Typeface.create(paint.getTypeface(),Typeface.ITALIC));
         }
         paint.setStyle(Paint.Style.FILL);
+        //paint.setStrokeWidth(width);      majd ha lesz kerete a szövegnek akkor kellhet ez
         canvas.drawText(text, point.getX(), point.getY(), paint);
         paint = oldpaint;
         paint.setStyle(ps);

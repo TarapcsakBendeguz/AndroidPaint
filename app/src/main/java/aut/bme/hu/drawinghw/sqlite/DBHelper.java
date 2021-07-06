@@ -15,7 +15,7 @@ import aut.bme.hu.drawinghw.sqlite.table.TextsTable;
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "simpledrawer.db";
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     public DBHelper(final Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

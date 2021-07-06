@@ -9,8 +9,8 @@ public class Line extends DrawObject {
         super();
     }
 
-    public Line(final Point start, final Point end, final int order) {
-        super(order, ObjectTypes.LINE);
+    public Line(final Point start, final Point end, final int order, final int width) {
+        super(order, ObjectTypes.LINE, width);
         this.start = start;
         this.end = end;
     }

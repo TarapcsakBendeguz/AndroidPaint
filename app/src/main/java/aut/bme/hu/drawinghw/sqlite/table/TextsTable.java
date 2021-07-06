@@ -17,6 +17,7 @@ public class TextsTable {
             + Columns.B.name() + " real not null, "
             + Columns.I.name() + " real not null, "
             + Columns.ordernum.name() + " real not null, "
+            + Columns.strokeWidth.name() + " real not null, "
             + Columns.project.name() + " VARCHAR(50), "
             + Columns.type.name() + " VARCHAR(20) not null " + ");";
 
@@ -41,6 +42,7 @@ public class TextsTable {
         B,
         I,
         ordernum,
+        strokeWidth,
         project,
         type
     }

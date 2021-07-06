@@ -17,8 +17,8 @@ public class Image extends DrawObject {
         super();
     }
 
-    public Image(final Point aPoint, final Point bPoint, final Bitmap bm, final int order) {
-        super(order, ObjectTypes.IMAGE);
+    public Image(final Point aPoint, final Point bPoint, final Bitmap bm, final int order, final int width) {
+        super(order, ObjectTypes.IMAGE, width);
         this.aPoint = aPoint;
         this.bPoint = bPoint;
         this.picture = bm;

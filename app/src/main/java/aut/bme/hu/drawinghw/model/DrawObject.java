@@ -3,6 +3,8 @@ package aut.bme.hu.drawinghw.model;
 public class DrawObject implements Comparable<DrawObject> {
     protected int orderNum;
 
+    protected int strokeWidth;
+
     public enum ObjectTypes {
         LINE,
         POINT,
@@ -17,9 +19,10 @@ public class DrawObject implements Comparable<DrawObject> {
     public DrawObject() {
     }
 
-    public DrawObject(final int orderNum, final ObjectTypes objectType) {
+    public DrawObject(final int orderNum, final ObjectTypes objectType, final int width) {
         this.orderNum = orderNum;
         this.objectType = objectType;
+        this.strokeWidth = width;
     }
 
     public int getOrderNum() {
@@ -55,6 +58,14 @@ public class DrawObject implements Comparable<DrawObject> {
                 this.objectType = ObjectTypes.TEXT;
                 break;
         }
+    }
+
+    public int getStrokeWidth() {
+        return strokeWidth;
+    }
+
+    public void setStrokeWidth(int width) {
+        strokeWidth = width;
     }
 
     public int compareTo(DrawObject object2) {

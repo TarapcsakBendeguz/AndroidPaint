@@ -14,8 +14,8 @@ public class Text extends DrawObject{
         super();
     }
 
-    public Text(final Point p, final int col, final String text, final String text_type, final int text_size, final int b, final int i, final int order) {
-        super(order, ObjectTypes.TEXT);
+    public Text(final Point p, final int col, final String text, final String text_type, final int text_size, final int b, final int i, final int order, final int width) {
+        super(order, ObjectTypes.TEXT, width);
         this.point = p;
         text_color = col;
         this.text = text;
