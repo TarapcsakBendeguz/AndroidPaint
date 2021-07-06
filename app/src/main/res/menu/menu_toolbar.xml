@@ -2,6 +2,33 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/stroke_width"
+        android:checkableBehavior="single"
+        android:icon="@drawable/ic_strk_width_small"
+        android:title="@string/stroke_width"
+        app:showAsAction="always">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/stroke_small"
+                    android:checked="true"
+                    android:title="@string/strk_small"/>
+                <item
+                    android:id="@+id/stroke_med"
+                    android:checked="false"
+                    android:title="@string/strk_med" />
+                <item
+                    android:id="@+id/stroke_big"
+                    android:checked="false"
+                    android:title="@string/strk_big" />
+                <item
+                    android:id="@+id/stroke_spec"
+                    android:checked="false"
+                    android:title="@string/strk_spec" />
+            </group>
+        </menu>
+    </item>
+    <item
         android:id="@+id/menu_style"
         android:checkableBehavior="single"
         android:icon="@drawable/baseline_remove_white_24"

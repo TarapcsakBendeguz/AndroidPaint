@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Android Paint</string>
 
+    <string name="stroke_width">Stroke Width</string>
     <string name="style">Style</string>
     <string name="line">Line</string>
     <string name="point">Point</string>
@@ -27,4 +28,9 @@
     <string name="existing_projects">Existing\nProjects:</string>
     <string name="new_project">New\nProject:</string>
     <string name="project_name">Project name</string>
+    <string name="strk_small">Small</string>
+    <string name="strk_med">Medium</string>
+    <string name="strk_big">Large</string>
+    <string name="preview">Preview:</string>
+    <string name="strk_spec">Special</string>
 </resources>
